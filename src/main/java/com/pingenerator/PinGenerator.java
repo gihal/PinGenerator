@@ -28,4 +28,21 @@ public class PinGenerator implements Serializable, Cloneable {
         }
         return pinGenerator;
     }
+
+    /**
+     * Get a thousand set of four digit positive integers
+     *
+     * @return Returns a set of integers
+     */
+    public synchronized Set<Integer> getPins() {
+        Set<Integer> pins = new HashSet<Integer>();
+        SecureRandom secureRandom = new SecureRandom();
+        while (pins.size() < 1000) {
+            int pin = secureRandom.nextInt(100000);
+            if (pin > 999 && pin < 10000) {
+                pins.add(pin);
+            }
+        }
+        return pins;
+    }
 }

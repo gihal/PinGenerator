@@ -3,8 +3,9 @@ package com.pingenerator;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import java.util.Set;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 class PinGeneratorTest {
 
@@ -21,6 +22,25 @@ class PinGeneratorTest {
     @Test
     void testGetInstanceProvidePinGenerator() {
         assertEquals(PinGenerator.getInstance().getClass(), PinGenerator.class);
+    }
+
+
+    @DisplayName("Test the size of the set is equal to 1000")
+    @Test
+    void testThePinSetSize() {
+        PinGenerator instance = PinGenerator.getInstance();
+        Set<Integer> pins = instance.getPins();
+        assertEquals(1000, pins.size());
+    }
+
+    @DisplayName("Test the pins are four digits numbers")
+    @Test
+    void testThePinSize() {
+        PinGenerator instance = PinGenerator.getInstance();
+        Set<Integer> pins = instance.getPins();
+        for (Integer pin : pins) {
+            assertTrue(pin > 999 && pin < 10000);
+        }
     }
 
 }
